@@ -4,7 +4,8 @@ import {
     MarsRoverDataResponse,
     CosmosDataResponse
  } from "./types";
- import oracledb from 'oracledb';
+
+ import { MongoClient } from 'mongodb';
 
  const BASE_URL = "https://api.nasa.gov/planetary/apd\?api_key\=";
 
@@ -37,38 +38,24 @@ import {
         }
     }
 
-    const getCosmosData = () => {
-        // Return some dummy data for testing
+    // const getCosmosData = () => {
+    //     // Return some dummy data for testing
+    //     return {
+    //         message: "This is cosmos data from Oracle",
+    //         timestamp: new Date().toISOString()
+    //     };
+    // }
+
+
+
+    const getCosmosData = async () => {
         return {
-            message: "This is cosmos data from Oracle",
-            timestamp: new Date().toISOString()
-        };
+            mabn: "14002475",
+            hoten: "Test Patient",
+            ngaysinh: "1980-01-01",
+            // other fields as needed
+          };
     }
-
-
-
-    // const getCosmosData = async (): Promise<CosmosDataResponse> => {
-    //     try {
-    //         const connection = await oracledb.getConnection({
-    //             user: 'ehisdb',
-    //             password: 'ehisdb',
-    //             connectString: '192.168.1.250:1521/ehis.songan'
-    //           });
-    //         // Execute query
-    //         const result = await connection.execute(
-    //             `SELECT * FROM ehisdb.btdbn WHERE mabn='14002475'`,
-    //             [],
-    //             { outFormat: oracledb.OUT_FORMAT_OBJECT }
-    //         );
-
-    //         // Close connection
-    //         await connection.close();
-    //         return result.rows;
-    //     } catch (error) {
-    //         console.error("Oracle connection error:", error);
-    //         throw error;
-    //     }
-    //   }
 
     return {
         getAPOD,

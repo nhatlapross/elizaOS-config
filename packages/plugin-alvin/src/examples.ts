@@ -97,13 +97,13 @@ export const getCosmosDataExample: ActionExample[][]=[
         {
             user:"{{user1}}",
             content:{
-                text:"Get my cosmos data from oracle?",
+                text:"Get earth photo for email nhatlapross@gmail.com?",
             }
         },
         {
             user:"{{agent}}",
             content:{
-                text:"Let me get your cosmos data from oracle.",
+                text:"Here's your earth photo send to email nhatlapross@gmail.com.",
                 action:"ORACLE_GET_COSMOS_DATA",
             }
         }
@@ -112,29 +112,14 @@ export const getCosmosDataExample: ActionExample[][]=[
         {
             user:"{{user1}}",
             content:{
-                text:"Can you get cosmos data from oracle?",
+                text:"Can you send earth photo to email nhatlapross@gmail.com?",
             }
         },
         {
             user:"{{agent}}",
             content:{
-                text:"Let me get your cosmos data from oracle.",
+                text:"Let me give email nhatlapross@gmail.com earth photo.",
                 action:"ORACLE_GET_COSMOS_DATA",
-            }
-        }
-    ],
-    [
-        {
-            "user":"{{user1}}",
-            "content":{
-                "text":"show me the cosmos?"
-            }
-        },
-        {
-            "user":"{{agent}}",
-            "content":{
-                "text":"Here is the cosmos.",
-                "action":"ORACLE_GET_COSMOS_DATA"
             }
         }
     ]

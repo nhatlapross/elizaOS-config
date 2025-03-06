@@ -2,6 +2,7 @@ node_modules
 /out
 
 ./client/node_modules
+./backendMongo/node_modules
 
 .env
 .env.production

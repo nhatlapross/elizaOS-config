@@ -6,7 +6,7 @@ import { getCosmosDataSimpleAction } from "./actions/testAction";
 export const alvinPlugin: Plugin = {
     name: "alvin",
     description: "Alvin's Plugin for Eliza",
-    actions: [getAPODAction, getMarsRoverAction, getCosmosDataAction,getCosmosDataSimpleAction],
+    actions: [getAPODAction, getMarsRoverAction, getCosmosDataAction],
     evaluators: [],
     providers: [],
 };

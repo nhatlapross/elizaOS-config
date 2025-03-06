@@ -28,12 +28,12 @@ export const getCosmosDataSimpleAction: Action = {
     examples: [[
         {
             user: "{{user1}}",
-            content: { text: "get simple cosmos" }
+            content: { text: "get earth photo" }
         },
         {
             user: "Astro",
             content: {
-                text: "Here's simple cosmos data.",
+                text: "Here's your earth photo.",
                 action: "NASA_GET_COSMOS_DATA"
             }
         }

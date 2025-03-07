@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // MongoDB Connection URI
-const uri = process.env.MONGODB_URI || 'mongodb+srv://wefit365:<db_password>@cluster0.h63jd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+const uri = process.env.MONGODB_URI || 'mongodb+srv://wefit365:wefit365@cluster0.h63jd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 
 // Database and Collection names
 const dbName = 'wefit365';

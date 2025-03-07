@@ -8,6 +8,7 @@ import { SlackClientInterface } from "@elizaos/client-slack";
 import { TelegramClientInterface } from "@elizaos/client-telegram";
 import { TwitterClientInterface } from "@elizaos/client-twitter";
 import { alvinPlugin } from "@elizaos/plugin-alvin";
+import { ehisPlugin } from "@elizaos/plugin-ehis";
 import {
     AgentRuntime,
     CacheManager,
@@ -526,6 +527,7 @@ export async function createAgent(
         // character.plugins are handled when clients are added
         plugins: [
             alvinPlugin,
+            ehisPlugin,
             bootstrapPlugin,
             suiPlugin,
             getSecret(character, "CONFLUX_CORE_PRIVATE_KEY")

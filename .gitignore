@@ -3,6 +3,7 @@ node_modules
 
 ./client/node_modules
 ./backendMongo/node_modules
+./ehisBackend/node_modules
 
 .env
 .env.production

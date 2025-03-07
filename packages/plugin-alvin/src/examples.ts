@@ -124,3 +124,36 @@ export const getCosmosDataExample: ActionExample[][]=[
         }
     ]
 ]
+
+export const sendCosmosDataExample: ActionExample[][]=[
+    [
+        {
+            user:"{{user1}}",
+            content:{
+                text:"Get moon photo with information name John, email john@example.com, and wallet 0x123456?",
+            }
+        },
+        {
+            user:"{{agent}}",
+            content:{
+                text:"Here's your moon photo with information.",
+                action:"ORACLE_SEND_COSMOS_DATA",
+            }
+        }
+    ],
+    [
+        {
+            user:"{{user1}}",
+            content:{
+                text:"Can you send moon photo with information with email test@test.com, height 175cm and weight 70kg?",
+            }
+        },
+        {
+            user:"{{agent}}",
+            content:{
+                text:"Let me give moon photo with information.",
+                action:"ORACLE_SEND_COSMOS_DATA",
+            }
+        }
+    ]
+]

@@ -9,6 +9,7 @@ import { TelegramClientInterface } from "@elizaos/client-telegram";
 import { TwitterClientInterface } from "@elizaos/client-twitter";
 import { alvinPlugin } from "@elizaos/plugin-alvin";
 import { ehisPlugin } from "@elizaos/plugin-ehis";
+import { videoGenerationPlugin } from "@elizaos/plugin-video-generation";
 import {
     AgentRuntime,
     CacheManager,
@@ -528,6 +529,7 @@ export async function createAgent(
         plugins: [
             alvinPlugin,
             ehisPlugin,
+            videoGenerationPlugin,
             bootstrapPlugin,
             suiPlugin,
             getSecret(character, "CONFLUX_CORE_PRIVATE_KEY")

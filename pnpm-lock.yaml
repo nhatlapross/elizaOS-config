@@ -258,6 +258,9 @@ importers:
       '@elizaos/plugin-twitter':
         specifier: workspace:*
         version: link:../packages/plugin-twitter
+      '@elizaos/plugin-video-generation':
+        specifier: workspace:*
+        version: link:../packages/plugin-video-generation
       '@elizaos/plugin-web-search':
         specifier: workspace:*
         version: link:../packages/plugin-web-search

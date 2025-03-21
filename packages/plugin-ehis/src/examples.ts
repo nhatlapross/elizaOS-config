@@ -47,3 +47,36 @@ export const getChongChiDinhThuoc: ActionExample[][] = [
         }
     ]
 ];
+
+export const getDiaChiLienHe: ActionExample[][] = [
+    [
+        {
+            user: "{{user1}}",
+            content: {
+                text: "Tôi có thể liên hệ với bạn thế nào."
+            }
+        },
+        {
+            user: "{{agent}}",
+            content: {
+                text: "Địa chỉ liên hệ 20 đường số 11 phường 10 Gò Vấp HCM, số điện thoại liên hệ 0901234567.",
+                action: "GET_DIA_CHI"
+            }
+        }
+    ],
+    [
+        {
+            user: "{{user1}}",
+            content: {
+                text: "Cho tôi địa chỉ liên hệ"
+            }
+        },
+        {
+            user: "{{agent}}",
+            content: {
+                text: "Địa chỉ liên hệ 20 đường số 11 phường 10 Gò Vấp HCM, số điện thoại liên hệ 0901234567.",
+                action: "GET_DIA_CHI"
+            }
+        }
+    ]
+];

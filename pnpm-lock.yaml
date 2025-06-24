@@ -204,6 +204,9 @@ importers:
       '@elizaos/plugin-evm':
         specifier: workspace:*
         version: link:../packages/plugin-evm
+      '@elizaos/plugin-fitness':
+        specifier: workspace:*
+        version: link:../packages/plugin-fitness
       '@elizaos/plugin-flow':
         specifier: workspace:*
         version: link:../packages/plugin-flow
@@ -1223,6 +1226,12 @@ importers:
       whatwg-url:
         specifier: 7.1.0
         version: 7.1.0
+
+  packages/plugin-fitness:
+    dependencies:
+      '@elizaos/core':
+        specifier: workspace:*
+        version: link:../core
 
   packages/plugin-flow:
     dependencies:

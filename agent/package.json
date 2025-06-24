@@ -64,6 +64,7 @@
         "@elizaos/plugin-alvin": "workspace:*",
         "@elizaos/plugin-ehis": "workspace:*",
         "@elizaos/plugin-video-generation": "workspace:*",
+         "@elizaos/plugin-fitness": "workspace:*",
         "readline": "1.3.0",
         "ws": "8.18.0",
         "yargs": "17.7.2"

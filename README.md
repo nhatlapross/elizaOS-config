@@ -1,150 +1,757 @@
-# Eliza 🤖
+# Hướng dẫn chạy Eliza OS và tùy chỉnh Character
 
-<div align="center">
-  <img src="./docs/static/img/eliza_banner.jpg" alt="Eliza Banner" width="100%" />
-</div>
+## 📋 Mục lục
+1. [Giới thiệu về Eliza OS](#giới-thiệu-về-eliza-os)
+2. [Cài đặt và chạy Eliza OS](#cài-đặt-và-chạy-eliza-os)
+3. [Cấu trúc dự án](#cấu-trúc-dự-án)
+4. [Tạo và tùy chỉnh Character](#tạo-và-tùy-chỉnh-character)
+5. [Tạo Plugin tùy chỉnh](#tạo-plugin-tùy-chỉnh)
+6. [Tích hợp với Frontend Angular](#tích-hợp-với-frontend-angular)
+7. [Xử lý lỗi thường gặp](#xử-lý-lỗi-thường-gặp)
 
-<div align="center">
+---
 
-📖 [Documentation](https://elizaos.github.io/eliza/) | 🎯 [Examples](https://github.com/thejoven/awesome-eliza)
+## 🤖 Giới thiệu về Eliza OS
 
-</div>
+Eliza OS là một framework mã nguồn mở để xây dựng AI agents thông minh với khả năng:
+- Đa nền tảng (Discord, Telegram, Twitter, Web)
+- Hỗ trợ nhiều mô hình AI (OpenAI, Anthropic, Google Gemini, v.v.)
+- Plugin system mở rộng
+- Character system tùy biến
 
-## 🌍 README Translations
+---
 
-[中文说明](./README_CN.md) | [日本語の説明](./README_JA.md) | [한국어 설명](./README_KOR.md) | [Français](./README_FR.md) | [Português](./README_PTBR.md) | [Türkçe](./README_TR.md) | [Русский](./README_RU.md) | [Español](./README_ES.md) | [Italiano](./README_IT.md) | [ไทย](./README_TH.md) | [Deutsch](./README_DE.md) | [Tiếng Việt](./README_VI.md) | [עִברִית](https://github.com/elizaos/Elisa/blob/main/README_HE.md) | [Tagalog](./README_TG.md) | [Polski](./README_PL.md) | [Arabic](./README_AR.md) | [Hungarian](./README_HU.md) | [Srpski](./README_RS.md)
+## 🚀 Cài đặt và chạy Eliza OS
 
-## 🚩 Overview
-
-<div align="center">
-  <img src="./docs/static/img/eliza_diagram.jpg" alt="Eliza Diagram" width="100%" />
-</div>
-
-## ✨ Features
-
-- 🛠️ Full-featured Discord, Twitter and Telegram connectors
-- 🔗 Support for every model (Llama, Grok, OpenAI, Anthropic, etc.)
-- 👥 Multi-agent and room support
-- 📚 Easily ingest and interact with your documents
-- 💾 Retrievable memory and document store
-- 🚀 Highly extensible - create your own actions and clients
-- ☁️ Supports many models (local Llama, OpenAI, Anthropic, Groq, etc.)
-- 📦 Just works!
-
-## Video Tutorials
-
-[AI Agent Dev School](https://www.youtube.com/watch?v=ArptLpQiKfI&list=PLx5pnFXdPTRzWla0RaOxALTSTnVq53fKL)
-
-## 🎯 Use Cases
-
-- 🤖 Chatbots
-- 🕵️ Autonomous Agents
-- 📈 Business Process Handling
-- 🎮 Video Game NPCs
-- 🧠 Trading
-
-## 🚀 Quick Start
-
-### Prerequisites
-
-- [Python 2.7+](https://www.python.org/downloads/)
-- [Node.js 23+](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
-- [pnpm](https://pnpm.io/installation)
-
-> **Note for Windows Users:** [WSL 2](https://learn.microsoft.com/en-us/windows/wsl/install-manual) is required.
-
-### Use the Starter (Recommended)
-
+### 1. Yêu cầu hệ thống
 ```bash
-git clone https://github.com/elizaos/eliza-starter.git
-cd eliza-starter
-cp .env.example .env
-pnpm i && pnpm build && pnpm start
+# Node.js version 18+
+node --version  # >= 18.0.0
+
+# pnpm package manager
+npm install -g pnpm
 ```
 
-Once the agent is running, you should see the message to run "pnpm start:client" at the end.
-Open another terminal and move to same directory and then run below command and follow the URL to chat to your agent.
-
+### 2. Clone và cài đặt
 ```bash
-pnpm start:client
-```
+# Clone repository
+git clone https://github.com/nhatlapross/elizaOS-config.git
+cd eliza
 
-Then read the [Documentation](https://elizaos.github.io/eliza/) to learn how to customize your Eliza.
+# Cài đặt dependencies
+pnpm install
 
-### Manually Start Eliza (Only recommended if you know what you are doing)
-
-```bash
-# Clone the repository
-git clone https://github.com/elizaos/eliza.git
-
-# Checkout the latest release
-# This project iterates fast, so we recommend checking out the latest release
-git checkout $(git describe --tags --abbrev=0)
-```
-
-### Start Eliza with Gitpod
-
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/elizaos/eliza/tree/main)
-
-### Edit the .env file
-
-Copy .env.example to .env and fill in the appropriate values.
-
-```
+# Copy file cấu hình
 cp .env.example .env
 ```
 
-Note: .env is optional. If you're planning to run multiple distinct agents, you can pass secrets through the character JSON
-Note: .env is optional. If you're planning to run multiple distinct agents, you can pass secrets through the character JSON
+### 3. Cấu hình Environment Variables
+Chỉnh sửa file `.env`:
 
-### Automatically Start Eliza
+```env
+# Model Provider (chọn một trong các options sau)
+# Google Gemini (khuyên dùng cho tiếng Việt)
+GOOGLE_GENERATIVE_AI_API_KEY=your_google_api_key
 
-This will run everything to set up the project and start the bot with the default character.
+# OpenAI
+OPENAI_API_KEY=your_openai_api_key
 
-```bash
-sh scripts/start.sh
+# Anthropic Claude
+ANTHROPIC_API_KEY=your_anthropic_api_key
+
+# Database (optional)
+POSTGRES_URL=postgresql://username:password@localhost:5432/eliza
+# Hoặc sử dụng SQLite (mặc định)
+SQLITE_FILE=./data/db.sqlite
+
+# Cache (optional)
+REDIS_URL=redis://localhost:6379
+CACHE_STORE=DATABASE  # hoặc REDIS, FILESYSTEM
+
+# Server
+SERVER_PORT=3000
+
+# Custom settings cho character Ehis
+MONGODB_BACKEND_URL=http://localhost:6000
 ```
 
-### Edit the character file
+### 4. Chạy ứng dụng
 
-1. Open `packages/core/src/defaultCharacter.ts` to modify the default character. Uncomment and edit.
-
-2. To load custom characters:
-    - Use `pnpm start --characters="path/to/your/character.json"`
-    - Multiple character files can be loaded simultaneously
-3. Connect with X (Twitter)
-    - change `"clients": []` to `"clients": ["twitter"]` in the character file to connect with X
-
-### Manually Start Eliza
-
+#### Chạy server backend:
 ```bash
-pnpm i
-pnpm build
+# Với character mặc định
 pnpm start
 
-# The project iterates fast, sometimes you need to clean the project if you are coming back to the project
-pnpm clean
+# Với character tùy chỉnh
+pnpm start --character="./characters/ehis.character.json"
+
+# Với nhiều characters
+pnpm start --characters="./characters/ehis.character.json,./characters/other.character.json"
 ```
 
-#### Additional Requirements
+#### Chạy client frontend:
+```bash
+# Trong terminal khác
+pnpm start:client
 
-You may need to install Sharp. If you see an error when starting up, try installing it with the following command:
+# Hoặc với port tùy chỉnh
+SERVER_PORT=3001 pnpm start:client
+```
+
+### 5. Truy cập ứng dụng
+- Frontend: http://localhost:5173
+- API Backend: http://localhost:3000
+- API Docs: http://localhost:3000/api
+
+---
+
+## 📁 Cấu trúc dự án
 
 ```
-pnpm install --include=optional sharp
+eliza/
+├── agent/                      # Main agent code
+│   ├── src/
+│   │   └── index.ts           # Entry point
+│   └── characters/            # Character definitions
+├── packages/
+│   ├── core/                  # Core framework
+│   ├── client-direct/         # Direct client
+│   └── plugin-*/             # Various plugins
+├── docs/                      # Documentation
+├── .env                       # Environment variables
+└── package.json
 ```
 
-### Community & contact
+---
 
-- [GitHub Issues](https://github.com/elizaos/eliza/issues). Best for: bugs you encounter using Eliza, and feature proposals.
-- [Discord](https://discord.gg/ai16z). Best for: sharing your applications and hanging out with the community.
+## 👤 Tạo và tùy chỉnh Character
 
-## Contributors
+### 1. Tạo file Character JSON
 
-<a href="https://github.com/elizaos/eliza/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=elizaos/eliza" />
-</a>
+Tạo file `characters/ehis.character.json`:
 
-## Star History
+```json
+{
+    "name": "Ehis",
+    "clients": ["direct"],
+    "modelProvider": "google",
+    "settings": {
+        "secrets": {},
+        "voice": {
+            "model": "vi_VN-male-medium"
+        }
+    },
+    "plugins": ["@elizaos/plugin-ehis"],
+    "bio": [
+        "Bác sĩ đa khoa với nhiều năm kinh nghiệm",
+        "Kê đơn thuốc theo triệu chứng bệnh",
+        "Cho lời khuyên về sức khỏe",
+        "Hỗ trợ thông tin y tế từ hệ thống"
+    ],
+    "lore": [
+        "5 năm kinh nghiệm trong ngành y",
+        "Kê đơn thuốc dựa vào kết luận bệnh",
+        "Đưa ra lời khuyên trong quá trình chữa bệnh"
+    ],
+    "knowledge": [
+        "Hiểu biết về các loại bệnh dựa vào triệu chứng",
+        "Hiểu biết về thuốc đông y và tây y",
+        "Biết bảng mã bệnh ICD10",
+        "Có khả năng truy cập thông tin hệ thống"
+    ],
+    "messageExamples": [
+        [
+            {
+                "user": "{{user1}}",
+                "content": {
+                    "text": "Xin chào, giới thiệu về bạn."
+                }
+            },
+            {
+                "user": "Ehis",
+                "content": {
+                    "text": "Tôi là Ehis, bác sĩ đa khoa có nhiều năm kinh nghiệm."
+                }
+            }
+        ]
+    ],
+    "style": {
+        "all": [
+            "Ngôn ngữ chuyên nghiệp nhưng dễ hiểu",
+            "Thân thiện và tận tâm",
+            "Tư vấn dựa trên triệu chứng"
+        ],
+        "chat": [
+            "Hướng dẫn tận tình",
+            "Kiến thức chuyên sâu",
+            "Thân thiện",
+            "Chuyên nghiệp"
+        ]
+    },
+    "topics": [
+        "Y tế",
+        "Khám và chữa bệnh",
+        "Chẩn đoán bệnh",
+        "Sức khỏe"
+    ]
+}
+```
 
-[![Star History Chart](https://api.star-history.com/svg?repos=elizaos/eliza&type=Date)](https://star-history.com/#elizaos/eliza&Date)
+### 2. Các thuộc tính quan trọng
+
+| Thuộc tính | Mô tả | Ví dụ |
+|------------|-------|-------|
+| `name` | Tên character | "Ehis" |
+| `clients` | Nền tảng hỗ trợ | ["direct", "discord", "telegram"] |
+| `modelProvider` | Nhà cung cấp AI | "google", "openai", "anthropic" |
+| `plugins` | Danh sách plugins | ["@elizaos/plugin-ehis"] |
+| `bio` | Tiểu sử ngắn | Mảng các câu mô tả |
+| `knowledge` | Kiến thức chuyên môn | Mảng các lĩnh vực |
+| `messageExamples` | Ví dụ hội thoại | Cặp câu hỏi-trả lời |
+| `style` | Phong cách giao tiếp | Object định nghĩa tone |
+
+---
+
+## 🔌 Tạo Plugin tùy chỉnh
+
+### 1. Cấu trúc Plugin
+
+Tạo thư mục `packages/plugin-ehis/`:
+
+```
+packages/plugin-ehis/
+├── src/
+│   ├── index.ts               # Main plugin file
+│   ├── actions/               # Các hành động
+│   │   ├── apiCallAction.ts
+│   │   ├── getChongChiDinhThuocAction.ts
+│   │   └── getDiaChi.ts
+│   ├── examples.ts            # Ví dụ hội thoại
+│   ├── types.ts              # Type definitions
+│   └── service.ts            # Business logic
+├── package.json
+└── tsconfig.json
+```
+
+### 2. Tạo Main Plugin File
+
+`src/index.ts`:
+```typescript
+import { Plugin } from "@elizaos/core";
+import { getChongChiDinhThuocAction } from "./actions/getChongChiDinhThuocAction";
+import { getDiaChiLienHeAction } from "./actions/getDiaChi";
+import { apiCallAction } from "./actions/apiCallAction";
+
+export const ehisPlugin: Plugin = {
+    name: "ehis",
+    description: "Ehis's Plugin for medical assistance",
+    actions: [
+        getChongChiDinhThuocAction,
+        getDiaChiLienHeAction,
+        apiCallAction
+    ],
+    evaluators: [],
+    providers: [],
+};
+
+export default ehisPlugin;
+```
+
+### 3. Tạo Action
+
+Ví dụ action lấy địa chỉ liên hệ (`actions/getDiaChi.ts`):
+
+```typescript
+import {
+    Action,
+    ActionExample,
+    HandlerCallback,
+    IAgentRuntime,
+    Memory,
+    State
+} from "@elizaos/core";
+
+export const getDiaChiLienHeAction: Action = {
+    name: "GET_DIA_CHI",
+    similes: [
+        "ĐỊA CHỈ LIÊN HỆ",
+        "LIÊN HỆ",
+        "THÔNG TIN LIÊN HỆ"
+    ],
+    description: "Lấy thông tin liên hệ của bác sĩ",
+    
+    // Kiểm tra xem có kích hoạt action này không
+    validate: async (runtime: IAgentRuntime, message: Memory) => {
+        const text = message.content?.text?.toLowerCase() || "";
+        
+        const contactKeywords = [
+            'địa chỉ liên hệ',
+            'thông tin liên hệ',
+            'liên hệ với bạn'
+        ];
+        
+        return contactKeywords.some(keyword => text.includes(keyword));
+    },
+    
+    // Xử lý logic chính
+    handler: async (
+        runtime: IAgentRuntime,
+        message: Memory,
+        state: State,
+        _options: { [key: string]: unknown },
+        callback: HandlerCallback
+    ) => {
+        if (callback) {
+            callback({
+                text: "📍 **Thông tin liên hệ bác sĩ Ehis:**\n\n🏠 **Địa chỉ:** 20 đường số 11, phường 10, Gò Vấp, TP.HCM\n📞 **Số điện thoại:** 0901234567",
+                data: { 
+                    address: "20 đường số 11 phường 10 Gò Vấp HCM",
+                    phone: "0901234567"
+                }
+            });
+        }
+        return true;
+    },
+    
+    // Ví dụ hội thoại
+    examples: [
+        [
+            {
+                user: "{{user1}}",
+                content: {
+                    text: "Cho tôi địa chỉ liên hệ"
+                }
+            },
+            {
+                user: "{{agent}}",
+                content: {
+                    text: "Địa chỉ liên hệ 20 đường số 11 phường 10 Gò Vấp HCM",
+                    action: "GET_DIA_CHI"
+                }
+            }
+        ]
+    ] as ActionExample[][],
+    
+    settings: {
+        priority: 0.7,
+        allowWithoutContext: true,
+        maxResponseSize: 1000
+    }
+} as Action;
+```
+
+### 4. Action gọi API với Bearer Token
+
+`actions/apiCallAction.ts`:
+```typescript
+export const apiCallAction: Action = {
+    name: "API_CALL_WITH_BEARER",
+    similes: [
+        "PHÒNG KHÁM ARV",
+        "DANH SÁCH PHÒNG KHÁM ARV", 
+        "GỌI API"
+    ],
+    description: "Gọi API với bearer token",
+    
+    validate: async (runtime: IAgentRuntime, message: Memory) => {
+        const text = message.content?.text?.toLowerCase() || "";
+        
+        // Kiểm tra từ khóa API
+        const apiKeywords = [
+            'phòng khám arv',
+            'danh sách phòng khám arv',
+            'api thongso'
+        ];
+        
+        return apiKeywords.some(keyword => text.includes(keyword));
+    },
+    
+    handler: async (
+        runtime: IAgentRuntime,
+        message: Memory,
+        state: State,
+        _options: { [key: string]: unknown },
+        callback: HandlerCallback
+    ) => {
+        try {
+            const messageText = message.content?.text || "";
+            let apiCallRequest = null;
+            
+            // Parse JSON nếu có
+            try {
+                const parsed = JSON.parse(messageText);
+                if (parsed && parsed.apiCallRequest) {
+                    apiCallRequest = parsed.apiCallRequest;
+                }
+            } catch (e) {
+                // Fallback: detect từ text
+                apiCallRequest = detectApiRequestFromText(messageText);
+            }
+            
+            if (!apiCallRequest) {
+                callback?.({
+                    text: "Không thể xác định yêu cầu API."
+                });
+                return false;
+            }
+
+            const { endpoint, method, bearerToken, headers } = apiCallRequest;
+            
+            // Gọi API
+            const response = await fetch(endpoint, {
+                method: method || 'GET',
+                headers: {
+                    'Authorization': `Bearer ${bearerToken}`,
+                    'Content-Type': 'application/json',
+                    ...headers
+                }
+            });
+            
+            if (!response.ok) {
+                throw new Error(`API error: ${response.status}`);
+            }
+
+            const responseText = await response.text();
+            const formattedResponse = formatResponse(responseText, endpoint);
+
+            callback?.({
+                text: formattedResponse,
+                data: responseText
+            });
+            
+            return true;
+
+        } catch (error: any) {
+            callback?.({
+                text: "Có lỗi xảy ra khi truy cập hệ thống."
+            });
+            return false;
+        }
+    },
+    
+    examples: [
+        [
+            {
+                user: "{{user1}}",
+                content: {
+                    text: "Lấy danh sách phòng khám ARV"
+                }
+            },
+            {
+                user: "{{agent}}",
+                content: {
+                    text: "Tôi sẽ lấy mã khoa phòng ARV từ hệ thống cho bạn.",
+                    action: "API_CALL_WITH_BEARER"
+                }
+            }
+        ]
+    ] as ActionExample[][]
+};
+```
+
+### 5. Đăng ký Plugin
+
+Thêm plugin vào `package.json`:
+```json
+{
+    "name": "@elizaos/plugin-ehis",
+    "version": "1.0.0",
+    "main": "dist/index.js",
+    "dependencies": {
+        "@elizaos/core": "workspace:*"
+    }
+}
+```
+
+Cập nhật `agent/src/index.ts` để import plugin:
+```typescript
+import { ehisPlugin } from "@elizaos/plugin-ehis";
+
+// Thêm vào danh sách plugins
+plugins: [
+    // ... other plugins
+    ehisPlugin,
+    // ...
+]
+```
+
+---
+
+## 🌐 Tích hợp với Frontend Angular
+
+### 1. Service Angular
+
+Tạo `chat.service.ts`:
+```typescript
+import { Injectable } from '@angular/core';
+import { Observable, from, switchMap } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+
+export interface ChatMessage {
+    role: 'system' | 'user' | 'assistant';
+    content: string;
+}
+
+export interface ElizaResponse {
+    user?: string;
+    text: string;
+    action?: string;
+    data?: any;
+}
+
+@Injectable({
+    providedIn: 'root'
+})
+export class ChatService {
+    private baseUrl = 'http://localhost:3000/api';
+    private agentId: string | null = null;
+    
+    constructor(private http: HttpClient) {}
+
+    // Lấy agent ID
+    private async getAgentId(): Promise<string> {
+        if (this.agentId) return this.agentId;
+        
+        const response = await this.http.get<{agents: any[]}>(`${this.baseUrl}/agents`).toPromise();
+        const ehisAgent = response?.agents.find(agent => agent.name === 'Ehis');
+        
+        if (!ehisAgent) throw new Error('Ehis agent not found');
+        
+        this.agentId = ehisAgent.id;
+        return this.agentId;
+    }
+
+    // Gửi tin nhắn thường
+    sendMessage(text: string, userId: string, roomId: string): Observable<ElizaResponse[]> {
+        return from(this.getAgentId()).pipe(
+            switchMap(agentId => {
+                const requestBody = { text, userId, roomId };
+                return this.http.post<ElizaResponse[]>(`${this.baseUrl}/${agentId}/message`, requestBody);
+            })
+        );
+    }
+
+    // Gửi tin nhắn với API call
+    sendMessageWithApiCall(
+        text: string, 
+        userId: string, 
+        roomId: string, 
+        apiCallRequest: any
+    ): Observable<ElizaResponse[]> {
+        return from(this.getAgentId()).pipe(
+            switchMap(agentId => {
+                const requestBody = {
+                    text: JSON.stringify({
+                        text: text,
+                        apiCallRequest: apiCallRequest
+                    }),
+                    userId,
+                    roomId
+                };
+                
+                return this.http.post<ElizaResponse[]>(`${this.baseUrl}/${agentId}/message`, requestBody);
+            })
+        );
+    }
+}
+```
+
+### 2. Component Angular
+
+`tro-ly-ai.component.ts`:
+```typescript
+import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { ChatService } from './chat.service';
+
+interface Message {
+    content: string;
+    sender: 'user' | 'assistant';
+    timestamp: Date;
+}
+
+@Component({
+    templateUrl: './tro-ly-ai.component.html',
+    styleUrls: ['./tro-ly-ai.component.css']
+})
+export class TroLyAIComponent implements OnInit {
+    messages: Message[] = [];
+    messageInput = new FormControl('');
+    isLoading = false;
+    userId: string = 'testUser';
+    roomId: string = 'default-room';
+
+    constructor(private chatService: ChatService) {}
+
+    ngOnInit() {
+        // Tin nhắn chào mừng
+        this.addBotMessage('Xin chào! Tôi là bác sĩ Ehis. Tôi có thể giúp gì cho bạn?');
+    }
+
+    async sendMessage() {
+        const message = this.messageInput.value?.trim();
+        
+        if (!message || this.isLoading) return;
+
+        this.isLoading = true;
+        this.addUserMessage(message);
+        this.messageInput.setValue('');
+
+        try {
+            // Phát hiện yêu cầu API
+            const apiRequest = this.detectApiRequest(message);
+            
+            let observable;
+            if (apiRequest) {
+                observable = this.chatService.sendMessageWithApiCall(
+                    message, this.userId, this.roomId, apiRequest
+                );
+            } else {
+                observable = this.chatService.sendMessage(
+                    message, this.userId, this.roomId
+                );
+            }
+            
+            observable.subscribe({
+                next: (responses) => {
+                    responses.forEach(response => {
+                        if (response.text?.trim()) {
+                            this.addBotMessage(response.text);
+                        }
+                    });
+                },
+                error: (error) => {
+                    this.addBotMessage('Xin lỗi, có lỗi xảy ra. Vui lòng thử lại.');
+                },
+                complete: () => {
+                    this.isLoading = false;
+                }
+            });
+        } catch (error) {
+            this.addBotMessage('Đã xảy ra lỗi khi gửi tin nhắn.');
+            this.isLoading = false;
+        }
+    }
+
+    private detectApiRequest(message: string): any | null {
+        const lowerMessage = message.toLowerCase();
+        
+        if (lowerMessage.includes('phòng khám arv')) {
+            return {
+                endpoint: 'http://localhost:5284/api/ThongSo/GetPhongKhamARV',
+                method: 'GET',
+                bearerToken: 'your-token-here',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            };
+        }
+        
+        return null;
+    }
+
+    private addUserMessage(content: string) {
+        this.messages.push({
+            content,
+            sender: 'user',
+            timestamp: new Date()
+        });
+    }
+
+    private addBotMessage(content: string) {
+        this.messages.push({
+            content,
+            sender: 'assistant',
+            timestamp: new Date()
+        });
+    }
+}
+```
+
+---
+
+## ❗ Xử lý lỗi thường gặp
+
+### 1. Lỗi API Key không hợp lệ
+```bash
+Error: API key not found for provider google
+```
+
+**Giải pháp:**
+- Kiểm tra file `.env` có đúng key không
+- Đảm bảo key có quyền truy cập API
+- Restart server sau khi thay đổi `.env`
+
+### 2. Lỗi không tìm thấy Character
+```bash
+Error loading character from ./characters/ehis.character.json: File not found
+```
+
+**Giải pháp:**
+- Kiểm tra đường dẫn file character
+- Đảm bảo file JSON có syntax hợp lệ
+- Kiểm tra quyền đọc file
+
+### 3. Lỗi Plugin không load được
+```bash
+Error: Cannot find module '@elizaos/plugin-ehis'
+```
+
+**Giải pháp:**
+```bash
+# Build lại plugin
+cd packages/plugin-ehis
+pnpm build
+
+# Install dependencies
+pnpm install
+
+# Restart server
+pnpm start
+```
+
+### 4. Lỗi Database connection
+```bash
+Error: Database connection failed
+```
+
+**Giải pháp:**
+- Kiểm tra PostgreSQL đang chạy (nếu dùng Postgres)
+- Hoặc đổi sang SQLite: xóa `POSTGRES_URL` trong `.env`
+- Tạo thư mục `data/` nếu chưa có
+
+### 5. Lỗi CORS khi gọi từ frontend
+```bash
+Access to XMLHttpRequest blocked by CORS policy
+```
+
+**Giải pháp:**
+Thêm CORS middleware trong server hoặc chạy frontend cùng domain.
+
+---
+
+## 📝 Ghi chú quan trọng
+
+1. **Backup dữ liệu**: Luôn backup database và character files
+2. **Environment**: Sử dụng file `.env` riêng cho từng môi trường
+3. **Security**: Không commit API keys vào Git
+4. **Testing**: Test kỹ các actions trước khi deploy
+5. **Performance**: Monitor usage API để tránh vượt quota
+
+---
+
+## 🎯 Kết luận
+
+Với hướng dẫn này, bạn có thể:
+- ✅ Chạy thành công Eliza OS
+- ✅ Tạo character tùy chỉnh
+- ✅ Phát triển plugin riêng
+- ✅ Tích hợp với frontend Angular
+- ✅ Xử lý các lỗi phổ biến
+
+Để tìm hiểu thêm, tham khảo:
+- [Eliza OS Documentation](https://elizaos.github.io/eliza/)
+- [API Reference](https://elizaos.github.io/eliza/api/)
+- [Plugin Development Guide](https://elizaos.github.io/eliza/plugins/)
+
+**Chúc bạn phát triển thành công AI agent của mình! 🚀**

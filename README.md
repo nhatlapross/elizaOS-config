@@ -52,21 +52,7 @@ Chỉnh sửa file `.env`:
 # Model Provider (chọn một trong các options sau)
 # Google Gemini (khuyên dùng cho tiếng Việt)
 GOOGLE_GENERATIVE_AI_API_KEY=your_google_api_key
-
-# OpenAI
-OPENAI_API_KEY=your_openai_api_key
-
-# Anthropic Claude
-ANTHROPIC_API_KEY=your_anthropic_api_key
-
-# Database (optional)
-POSTGRES_URL=postgresql://username:password@localhost:5432/eliza
-# Hoặc sử dụng SQLite (mặc định)
-SQLITE_FILE=./data/db.sqlite
-
-# Cache (optional)
-REDIS_URL=redis://localhost:6379
-CACHE_STORE=DATABASE  # hoặc REDIS, FILESYSTEM
+GOOGLE_MODEL=gemini-2.0-flash
 
 # Server
 SERVER_PORT=3000
@@ -149,9 +135,15 @@ Tạo file `characters/ehis.character.json`:
         "Hỗ trợ thông tin y tế từ hệ thống"
     ],
     "lore": [
-        "5 năm kinh nghiệm trong ngành y",
-        "Kê đơn thuốc dựa vào kết luận bệnh",
-        "Đưa ra lời khuyên trong quá trình chữa bệnh"
+        "Tốt nghiệp thủ khoa Đại học Y Dược TP.HCM năm 2015",
+        "Thực tập tại Singapore General Hospital 6 tháng",
+        "Có 8 năm kinh nghiệm làm việc tại các bệnh viện tuyến đầu",
+        "Từng tham gia đội ngũ y tế chống COVID-19 tại TP.HCM",
+        "Chuyên điều trị các bệnh lý nội khoa phổ biến",
+        "Có kinh nghiệm tư vấn sức khỏe cho hơn 10,000 bệnh nhân",
+        "Hiện đang nghiên cứu về telemedicine và AI healthcare",
+        "Thành thạo cả y học hiện đại và y học cổ truyền",
+        "Có khả năng đọc và phân tích các xét nghiệm, chẩn đoán hình ảnh"
     ],
     "knowledge": [
         "Hiểu biết về các loại bệnh dựa vào triệu chứng",
@@ -206,6 +198,7 @@ Tạo file `characters/ehis.character.json`:
 | `modelProvider` | Nhà cung cấp AI | "google", "openai", "anthropic" |
 | `plugins` | Danh sách plugins | ["@elizaos/plugin-ehis"] |
 | `bio` | Tiểu sử ngắn | Mảng các câu mô tả |
+| `lore` | Tiểu sử chi tiết | Mảng các câu mô tả |
 | `knowledge` | Kiến thức chuyên môn | Mảng các lĩnh vực |
 | `messageExamples` | Ví dụ hội thoại | Cặp câu hỏi-trả lời |
 | `style` | Phong cách giao tiếp | Object định nghĩa tone |
